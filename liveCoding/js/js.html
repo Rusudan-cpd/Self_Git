@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES_tabella_js</title>
+
+    <style>
+        h1 {
+            text-align: center;
+            background-color: beige;
+        }
+
+        table {
+            width: 60%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .add-row {
+            display: block;
+            margin: auto;
+            cursor: pointer;
+            background-color: green;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+
+        }
+
+        .remove {
+
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ✅ Aggiungi una riga con il pulsante +
+✅ Rimuovi una riga con il pulsante -
+✅ Ogni riga ha un campo di testo modificabile
+✅ Usa solo classi CSS, senza id
+✅ Dinamico, puoi gestire più righe
+     -->
+
+
+    <h1 class="titolo">ES tabella</h1>
+    <button class="add-row"> ➕ Riga</button>
+    <table>
+        <thead>
+            <tr>
+                <th>numeroArray</th>
+                <th>valoreArray</th>
+                <th>Pulsant ➖ </th>
+            </tr>
+        </thead>
+        <tbody class="tbody">
+
+            <!-- i campi saranno inseriti dal codice JS -->
+        </tbody>
+    </table>
+
+    <script>
+        let count = 0;
+        // gestore di ascolto al click del mouse sul bottone +
+        document.querySelector(".add-row").addEventListener("click", function () {
+            console.log("hai cliccato il pulsante + ")
+            aggiungiRiga()
+        });
+
+        // funzione per aggiugere una nuova riga contenente un campo id, input, button
+        function aggiungiRiga() {
+            // recupera il corpo della tabella
+            let tbody = document.querySelector(".tbody")
+            // creazione della riga all'interno di <tbody>
+            let riga = document.createElement("tr")
+
+            // inserimento delle celle <td> 
+            // per inserire il codice in maniera pulita usa backtick alt+96 (`)
+            riga.innerHTML = `
+                <td> id ${++count} </td>
+                <td> <input type="text" placeholder="inserisci del testo"/></td>
+                <td> <button class="remove">➖</button> </td>`;
+
+            // inserisce tutte le celle <td> e la  riga <tr> 
+            //  all'interno di <tbody>
+            tbody.appendChild(riga)
+
+            // gestore eventi per il pulsante "-"
+            riga.querySelector(".remove").addEventListener("click", function () {
+                //metodo per rimuovere il figlio di riga
+                --count
+                riga.remove()
+
+            });
+
+
+
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
